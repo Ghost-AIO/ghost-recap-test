@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 const axios = require('axios');
-import qs from 'qs';
+const qs = require('query-string');
 export default (req, res) => {
   
   res.statusCode = 200
