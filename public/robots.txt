@@ -1,0 +1,5 @@
+User-Agent: *
+Allow: /
+Allow: /recaptcha-test
+Allow: /invisible-recaptcha-test
+Allow: /v3-recaptcha-test
