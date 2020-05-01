@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Router from 'next/router';
+import dynamic from 'next/dynamic';
 import { v3 } from '../utils/keys';
-import {ReCaptcha ,loadReCaptcha } from "react-recaptcha-v3";
+import {ReCaptcha ,loadReCaptcha } from 'react-recaptcha-v3';
 const axios = require('axios');
 
 
@@ -19,7 +20,7 @@ class RecaptchaTest extends Component {
     loadReCaptcha(this.props.config.sitekey);
   }
   verifyCallback = (token) => {
-    // Here you will get the final recaptchaToken!!!  
+
     axios.post('/api/verify', { token }).then(response => {
       this.setState({ recaptchaResponse: JSON.stringify(response.data, null, 4) });
     });
@@ -47,7 +48,6 @@ class RecaptchaTest extends Component {
                 sitekey={this.props.config.sitekey}
                 action={this.props.config.action}
                 verifyCallback={this.verifyCallback}
-                // onChange={() => {}}
             />
 
       </div>
@@ -57,11 +57,10 @@ class RecaptchaTest extends Component {
   
 
 export async function getStaticProps() {
-    // Call an external API endpoint to get posts.
+
+
     const config = v3;
   
-    // By returning { props: posts }, the Blog component
-    // will receive `posts` as a prop at build time
     return {
       props: {
         config,
@@ -69,4 +68,7 @@ export async function getStaticProps() {
     }
 }
 
-export default RecaptchaTest
+// export default RecaptchaTest
+export default dynamic(() => Promise.resolve(RecaptchaTest), {
+  ssr: false
+})
